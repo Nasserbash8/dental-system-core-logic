@@ -73,7 +73,7 @@ Multi-Currency Support: Doctors can toggle between different currencies for bill
 
 ## 📸 لقطات من المشروع (Screenshots)
 
-#### لوحة تحكم الطبيب - البحث والولوج
+#### لوحة تحكم الطبيب 
 ![Dashboard Login](./public/screenshots/Dashboard-login.png)
 
 #### إضافة مريض جديد
