@@ -82,6 +82,10 @@ Multi-Currency Support: Doctors can toggle between different currencies for bill
 #### الصفحة الرئيسية للوحة التحكم
 ![Dashboard Home](./public/screenshots/Dashboard-Home-page.png)
 
+
+#### لوحة التحم - صفحة المريض
+![Dashboard patient profile](./public/screenshots/Dashboard-patient-profile-page.png)
+
 #### ملف المريض وتفاصيل العلاج والأسنان
-![Patient Profile 1](./public/screenshots/patient-profile-1.png)
-![Patient Profile 2](./public/screenshots/patient-profile-2.png)
+![Patient Profile 1](./public/screenshots/patient-profile1.png)
+![Patient Profile 2](./public/screenshots/patient-profile2.png)
