@@ -70,3 +70,18 @@ Upcoming Appointments: A clear view of the "Next Session Date" scheduled by the 
 
 
 Multi-Currency Support: Doctors can toggle between different currencies for billing to suit their financial environment.
+
+## 📸 لقطات من المشروع (Screenshots)
+
+#### لوحة تحكم الطبيب - البحث والولوج
+![Dashboard Login](./public/screenshots/Dashboard-login.png)
+
+#### إضافة مريض جديد
+![Add New Patient](./public/screenshots/Add-new-patient.png)
+
+#### الصفحة الرئيسية للوحة التحكم
+![Dashboard Home](./public/screenshots/Dashboard-Home-page.png)
+
+#### ملف المريض وتفاصيل العلاج والأسنان
+![Patient Profile 1](./public/screenshots/patient-profile-1.png)
+![Patient Profile 2](./public/screenshots/patient-profile-2.png)
