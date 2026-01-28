@@ -1,6 +1,6 @@
 # dental-system-core-logic
 Patient Management System (Dental Clinic Dashboard)
-A robust, modern Patient Management System built with Next.js 14, TypeScript, and Tailwind CSS. This system is specifically designed for dental clinics to track medical history, treatment sessions, and clinical imagery.
+A robust, modern Patient Management System built with Next.js , TypeScript, and Tailwind CSS. This system is specifically designed for dental clinics to track medical history, treatment sessions, and clinical imagery.
 
 newImages (Multipart File Data)
 
