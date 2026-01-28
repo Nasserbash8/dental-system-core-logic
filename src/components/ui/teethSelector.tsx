@@ -1,10 +1,16 @@
-// components/TeethSelector/TeethSelector.tsx
 'use client'
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import dynamic from "next/dynamic";
 import teeth from "../../../public/multiOptions/teeth.json";
 import { Plus } from "lucide-react";
+
+/**
+ * @Dental_ERP_Logic
+ * This component handles the complex selection of teeth and mapped treatments.
+ * Feature: Macro-selections (Groups) like "LUA" (Lower Upper Anterior) are expanded 
+ * into individual tooth IDs for database consistency.
+ */
 
 const MultiSelect = dynamic(() => import("@/components/form/MultiSelect"));
 
@@ -17,26 +23,26 @@ interface TeethSelectorProps {
     onSelectionChange: (selectedTeeth: Tooth[], customTreatments?: { id: string; value: string; customTreatment: string }[]) => void;
     initialSelected?: Tooth[];
     enableCustomTreatments?: boolean;
-    apiEndpoint?: string; // Optional - if you want the component to handle API calls
 }
 
 const TeethSelector: React.FC<TeethSelectorProps> = ({
     onSelectionChange,
     initialSelected = [],
     enableCustomTreatments = false,
-    apiEndpoint
 }) => {
+    /**
+     * @Macro_Groups
+     * Mapping anatomical groups to individual tooth identifiers.
+     * This optimizes the UI by allowing doctors to select groups of teeth with one click.
+     */
     const toothGroups: Record<string, string[]> = {
         LUA: ["LU1", "LU2", "LU3", "LU4", "LU5", "LU6", "LU7", "LU8"],
         RUA: ["RU1", "RU2", "RU3", "RU4", "RU5", "RU6", "RU7", "RU8"],
         LDA: ["LD1", "LD2", "LD3", "LD4", "LD5", "LD6", "LD7", "LD8"],
         RDA: ["RD1", "RD2", "RD3", "RD4", "RD5", "RD6", "RD7", "RD8"],
-
         U6:  ["LU1", "LU2", "LU3", "RU1", "RU2", "RU3"],
         U8:  ["LU1", "LU2", "LU3", "LU4", "RU1", "RU2", "RU3", "RU4"],
         U10: ["LU1", "LU2", "LU3", "LU4", "LU5", "RU1", "RU2", "RU3", "RU4", "RU5"],
-
-        
         D6:  ["LD1", "LD2", "LD3", "RD1", "RD2", "RD3"],
         D8:  ["LD1", "LD2", "LD3", "LD4", "RD1", "RD2", "RD3", "RD4"],
         D10: ["LD1", "LD2", "LD3", "LD4", "LD5", "RD1", "RD2", "RD3", "RD4", "RD5"],
@@ -47,6 +53,10 @@ const TeethSelector: React.FC<TeethSelectorProps> = ({
         { id: string; value: string; customTreatment: string }[]
     >([]);
 
+    /**
+     * Logic to expand selected groups into individual tooth entities.
+     * Ensures no duplicates and maintains reference integrity.
+     */
     const handleTeethChange = (values: Tooth[]) => {
         const allTeethFromJson = [...teeth];
         const expanded = values.flatMap(({ id }) => toothGroups[id] || [id]);
@@ -91,37 +101,34 @@ const TeethSelector: React.FC<TeethSelectorProps> = ({
     };
 
     return (
-        <div className="space-y-4">
+        <div className="space-y-4 p-4 bg-gray-50 dark:bg-gray-900/50 rounded-xl border border-gray-100 dark:border-gray-800">
             <MultiSelect
-                label="الأسنان"
+                label="اختيار الأسنان (يدوي أو مجموعات)"
                 options={teeth.map(t => ({ ...t, selected: false }))}
                 defaultSelected={initialSelected.map(t => t.value)}
                 onChange={handleTeethChange}
             />
 
-            {enableCustomTreatments && selectedTeeth.length > 1 && (
-                <>
-
-
+            {enableCustomTreatments && selectedTeeth.length > 0 && (
+                <div className="pt-4 border-t border-gray-200 dark:border-gray-700">
                     <button
                         type="button"
                         onClick={handleAddCustomTreatment}
-                        className="flex text-sm items-center  gap-2 px-4 py-2 mt-5 text-white bg-brand-600 rounded hover:bg-gray-700"
+                        className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-white bg-brand-600 rounded-lg hover:bg-brand-700 transition-colors shadow-sm"
                     >
                         <Plus className="w-4 h-4" />
-                        إضافة علاج خاص لسن
+                        إضافة تفاصيل علاج مخصصة لسن معين
                     </button>
 
-
-                    <div className="space-y-4 mt-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                         {customTreatments.map((item, index) => (
-                            <div key={index} className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label className="block mb-1">اختر السن</label>
+                            <div key={index} className="p-3 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 shadow-sm space-y-3">
+                                <div className="space-y-1">
+                                    <label className="text-xs font-bold text-gray-500 uppercase">السن المستهدف</label>
                                     <select
                                         value={item.id}
                                         onChange={(e) => handleUpdateCustomTreatment(index, "id", e.target.value)}
-                                        className="w-full border p-2 rounded"
+                                        className="w-full bg-transparent border-b border-gray-300 py-1 focus:border-brand-500 outline-none transition-colors"
                                     >
                                         {selectedTeeth
                                             .filter(t => !customTreatments.some((ct, i) => ct.id === t.id && i !== index))
@@ -133,29 +140,21 @@ const TeethSelector: React.FC<TeethSelectorProps> = ({
                                     </select>
                                 </div>
 
-                                <div>
-                                    <label className="block mb-1">العلاج المخصص</label>
-                                  <input
-  type="text"
-  value={item.customTreatment}
-  onChange={(e) => {
-    const updated = [...customTreatments];
-    updated[index].customTreatment = e.target.value; // فقط تحديث state
-    setCustomTreatments(updated);
-    // يمكن إرسال التحديث لأعلى للتخزين فقط، بدون submit
-    onSelectionChange(selectedTeeth, updated); 
-  }}
-  onKeyDown={(e) => {
-    if (e.key === "Enter") e.preventDefault(); // منع إرسال الفورم عند Enter
-  }}
-  className="w-full border p-2 rounded"
-  placeholder="مثال: تنظيف عميق"
-/>
+                                <div className="space-y-1">
+                                    <label className="text-xs font-bold text-gray-500 uppercase">وصف العلاج</label>
+                                    <input
+                                        type="text"
+                                        value={item.customTreatment}
+                                        onChange={(e) => handleUpdateCustomTreatment(index, "customTreatment", e.target.value)}
+                                        onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
+                                        className="w-full bg-transparent border-b border-gray-300 py-1 focus:border-brand-500 outline-none transition-colors"
+                                        placeholder="مثال: حشوة تجميلية، سحب عصب..."
+                                    />
                                 </div>
                             </div>
                         ))}
                     </div>
-                </>
+                </div>
             )}
         </div>
     );

@@ -1,61 +1,82 @@
-// pages/api/admin/login.ts
 import { NextRequest, NextResponse } from 'next/server';
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import { serialize } from "cookie";
 import dbConnect from "@/utils/dbConnect";
 import Admin from "@/models/admins";
+
+/**
+ * @Authentication_Module
+ * Handles secure administrative authentication and session issuance.
+ * Strategy: JWT-based authentication stored in HttpOnly cookies for enhanced security.
+ */
+
 export async function POST(req: NextRequest) {
   try {
     await dbConnect();
 
-    // Parse incoming request body
     const { email, password } = await req.json();
     const isProduction = process.env.NODE_ENV === "production";
 
-    // Validate required fields
+    // Standard validation to prevent empty credential processing
     if (!email || !password) {
       return NextResponse.json(
-        { success: false, message: "Missing required fields (email, password)" },
+        { success: false, message: "Missing required fields" },
         { status: 400 }
       );
     }
 
-    // Check if admin exists
+    /**
+     * @Security_Note: 
+     * Using .select("+password") because the field is hidden by default in the schema 
+     * to prevent accidental leaks in GET responses.
+     */
     const admin = await Admin.findOne({ email }).select("+password");
-    if (!admin) {
-      return NextResponse.json({ success: false, message: "البريد الإلكتروني أو كلمة المرور غير صحيحة." }, { status: 401 });
+    
+    // Generic error message to prevent "Username Enumeration" attacks
+    if (!admin || !(await bcrypt.compare(password, admin.password))) {
+      return NextResponse.json(
+        { success: false, message: "Invalid email or password." }, 
+        { status: 401 }
+      );
     }
 
-    // Compare password
-    const isValid = await bcrypt.compare(password, admin.password);
-    if (!isValid) {
-      return NextResponse.json({ success: false, message: "البريد الإلكتروني أو كلمة المرور غير صحيحة." }, { status: 401 });
-    }
-
-    // Generate JWT token
+    /**
+     * @Token_Generation:
+     * Issuing a signed JWT with a 24-hour expiration.
+     * Payload includes minimal non-sensitive user metadata.
+     */
     const token = jwt.sign(
       { id: admin._id, email: admin.email, role: "admin" },
       process.env.ADMIN_SECRET as string,
       { expiresIn: "1d" }
     );
 
-    // Set JWT token in a cookie (HTTP-only, secure, etc.)
-   const cookie = serialize("admin-token", token, {
-  httpOnly: true,
-  secure: isProduction, // false على localhost، true على الإنتاج
-  sameSite: isProduction ? "strict" : "lax",
-  path: "/",
-  maxAge: 60 * 60 * 24,
-});
-    // Set cookie header
+    /**
+     * @Cookie_Policy:
+     * HttpOnly: Prevents JavaScript access (Mitigates XSS).
+     * Secure: Ensures transmission over HTTPS only in production.
+     * SameSite Strict/Lax: Guards against CSRF attacks.
+     */
+    const cookie = serialize("admin-token", token, {
+      httpOnly: true,
+      secure: isProduction, 
+      sameSite: isProduction ? "strict" : "lax",
+      path: "/",
+      maxAge: 60 * 60 * 24, // 1 Day
+    });
+
     return NextResponse.json(
-      { success: true, message: "Logged in successfully" },
-      { status: 200, headers: { "Set-Cookie": cookie } }
+      { success: true, message: "Authentication successful" },
+      { 
+        status: 200, 
+        headers: { "Set-Cookie": cookie } 
+      }
     );
   } catch (error: any) {
+    console.error("LOGIN_ERROR:", error.message);
     return NextResponse.json(
-      { success: false, message: error.message },
+      { success: false, message: "An internal error occurred." }, 
       { status: 500 }
     );
   }
