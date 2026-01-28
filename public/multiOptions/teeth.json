@@ -1,0 +1,52 @@
+[
+  { "id": "LUA", "value": "علوي يسار كامل", "text": "علوي يسار كامل", "selected": false },
+  { "id": "RUA", "value": "علوي يمين كامل", "text": "علوي يمين كامل", "selected": false },
+
+  { "id": "LDA", "value": "سفلي يسار كامل", "text": "سفلي يسار كامل", "selected": false },
+  { "id": "RDA", "value": "سفلي يمين كامل", "text": "سفلي يمين كامل", "selected": false },
+
+  
+  { "id": "U6", "value": "علوي ( ابتسامة 6 )", "text": "علوي ( ابتسامة 6 )", "selected": false },
+  { "id": "U8", "value": "علوي ( ابتسامة 8 )", "text": "علوي ( ابتسامة 8 )", "selected": false },
+  { "id": "U10", "value": "علوي ( ابتسامة 10 )", "text": "علوي ( ابتسامة 10 )", "selected": false },
+
+  { "id": "D6", "value": "سفلي ( ابتسامة 6 )", "text": "سفلي ( ابتسامة 6 )", "selected": false },
+  { "id": "D8", "value": "سفلي ( ابتسامة 8 )", "text": "سفلي ( ابتسامة 8 )", "selected": false },
+  { "id": "D10", "value": "سفلي ( ابتسامة 10 )", "text": "سفلي ( ابتسامة 10 )", "selected": false },
+
+  { "id": "LU1", "value": "علوي يسار 1", "text": "علوي يسار 1", "selected": false },
+  { "id": "LU2", "value": "علوي يسار 2", "text": "علوي يسار 2", "selected": false },
+  { "id": "LU3", "value": "علوي يسار 3", "text": "علوي يسار 3", "selected": false },
+  { "id": "LU4", "value": "علوي يسار 4", "text": "علوي يسار 4", "selected": false },
+  { "id": "LU5", "value": "علوي يسار 5", "text": "علوي يسار 5", "selected": false },
+  { "id": "LU6", "value": "علوي يسار 6", "text": "علوي يسار 6", "selected": false },
+  { "id": "LU7", "value": "علوي يسار 7", "text": "علوي يسار 7", "selected": false },
+  { "id": "LU8", "value": "علوي يسار 8", "text": "علوي يسار 8", "selected": false },
+
+  { "id": "LD1", "value": "سفلي يسار 1", "text": "سفلي يسار 1", "selected": false },
+  { "id": "LD2", "value": "سفلي يسار 2", "text": "سفلي يسار 2", "selected": false },
+  { "id": "LD3", "value": "سفلي يسار 3", "text": "سفلي يسار 3", "selected": false },
+  { "id": "LD4", "value": "سفلي يسار 4", "text": "سفلي يسار 4", "selected": false },
+  { "id": "LD5", "value": "سفلي يسار 5", "text": "سفلي يسار 5", "selected": false },
+  { "id": "LD6", "value": "سفلي يسار 6", "text": "سفلي يسار 6", "selected": false },
+  { "id": "LD7", "value": "سفلي يسار 7", "text": "سفلي يسار 7", "selected": false },
+  { "id": "LD8", "value": "سفلي يسار 8", "text": "سفلي يسار 8", "selected": false },
+
+  { "id": "RU2", "value": "علوي يمين 2", "text": "علوي يمين 2", "selected": false },
+  { "id": "RU1", "value": "علوي يمين 1", "text": "علوي يمين 1", "selected": false },
+  { "id": "RU3", "value": "علوي يمين 3", "text": "علوي يمين 3", "selected": false },
+  { "id": "RU4", "value": "علوي يمين 4", "text": "علوي يمين 4", "selected": false },
+  { "id": "RU5", "value": "علوي يمين 5", "text": "علوي يمين 5", "selected": false },
+  { "id": "RU6", "value": "علوي يمين 6", "text": "علوي يمين 6", "selected": false },
+  { "id": "RU7", "value": "علوي يمين 7", "text": "علوي يمين 7", "selected": false },
+  { "id": "RU8", "value": "علوي يمين 8", "text": "علوي يمين 8", "selected": false },
+
+  { "id": "RD1", "value": "سفلي يمين 1", "text": "سفلي يمين 1", "selected": false },
+  { "id": "RD2", "value": "سفلي يمين 2", "text": "سفلي يمين 2", "selected": false },
+  { "id": "RD3", "value": "سفلي يمين 3", "text": "سفلي يمين 3", "selected": false },
+  { "id": "RD4", "value": "سفلي يمين 4", "text": "سفلي يمين 4", "selected": false },
+  { "id": "RD5", "value": "سفلي يمين 5", "text": "سفلي يمين 5", "selected": false },
+  { "id": "RD6", "value": "سفلي يمين 6", "text": "سفلي يمين 6", "selected": false },
+  { "id": "RD7", "value": "سفلي يمين 7", "text": "سفلي يمين 7", "selected": false },
+  { "id": "RD8", "value": "سفلي يمين 8", "text": "سفلي يمين 8", "selected": false }
+]

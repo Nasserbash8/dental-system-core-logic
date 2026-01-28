@@ -1,0 +1,16 @@
+[
+    { "id": "illnesses 1", "value": "سكري", "text": "سكري", "selected": false },
+    { "id": "illnesses 2" ,  "value": "ضغط", "text": "ضغط", "selected": false },
+    { "id": "illnesses 3" ,  "value": "صرع", "text": "صرع", "selected": false },
+    { "id": "illnesses 4" ,  "value": "أمراض القلب", "text": "أمراض القلب", "selected": false },
+    { "id": "illnesses 5" ,  "value": "أمراض الغدة", "text": "أمراض الغدة", "selected": false },
+    { "id": "illnesses 6" ,  "value": "حساسية", "text": "حساسية", "selected": false },
+    { "id": "illnesses 7" ,  "value": "حمل", "text": "حمل", "selected": false },
+    { "id": "illnesses 8" ,  "value": "إرضاع", "text": "إرضاع", "selected": false },
+    { "id": "illnesses 9" ,  "value": "تناول دواء مخدر", "text": "تناول دواء مخدر", "selected": false },
+    { "id": "illnesses 10" ,  "value": "سرطان", "text": "سرطان", "selected": false },
+    { "id": "illnesses 11" ,  "value": "ايدز", "text": "ايدز", "selected": false },
+    { "id": "illnesses 12" ,  "value": "معالجة شعاعية", "text": "معالجة شعاعية", "selected": false },
+    { "id": "illnesses 13" ,  "value": "معالجة كيمائية", "text": "معالجة كيمائية", "selected": false }
+]
+  
